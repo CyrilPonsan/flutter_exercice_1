@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'post.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,17 +12,25 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'gnomeBook',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Exercice()
+        debugShowCheckedModeBanner: false,
+        title: 'gnomeBook',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        home: Exercice()
     );
   }
 }
 
 class Exercice extends StatelessWidget {
+
+  List<Post> posts = [
+    Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
+    Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
+    Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
+    Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
+    Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -103,10 +112,7 @@ class Exercice extends StatelessWidget {
               allFriends(width / 3.5),
               myDivider(),
               sectionTitleText("Mes Posts"),
-              post(time: "5 minutes", image: "images/post.jpg", desc: "Visite chez Grand Ma"),
-              post(time: "5 minutes", image: "images/post.jpg", desc: "Visite chez Grand Ma"),
-              post(time: "5 minutes", image: "images/post.jpg", desc: "Visite chez Grand Ma"),
-              post(time: "5 minutes", image: "images/post.jpg", desc: "Visite chez Grand Ma")
+              allPosts(),
             ],
           ),
         ),
@@ -114,7 +120,17 @@ class Exercice extends StatelessWidget {
     );
   }
 
-  Container post ({required String time, required image, required String desc, int likes = 0, int comments = 0}) {
+  Column allPosts() {
+    List<Widget> postToAdd = [];
+    for (var element in posts) {
+      postToAdd.add(post(post: element));
+    }
+    return Column(
+      children: postToAdd
+    );
+  }
+
+  Container post ({required Post post}) {
     return Container(
       margin: const EdgeInsets.only(top: 8, left: 3, right: 3),
       padding: const EdgeInsets.all(10),
@@ -130,17 +146,17 @@ class Exercice extends StatelessWidget {
               const Padding(
                 padding: EdgeInsets.only(left: 8),
               ),
-              const Text("Prof. Firizgoude"),
+              Text(post.name),
               const Spacer(),
-              timeText(time)
+              timeText(post.setTime())
             ],
           ),
           Padding(
             padding: const EdgeInsets.only(top: 8, bottom: 8),
-            child: Image.asset(image, fit: BoxFit.cover),
+            child: Image.asset(post.imagePath, fit: BoxFit.cover),
           ),
-          Text(desc, style: const TextStyle(
-            color: Colors.blueAccent
+          Text(post.desc, style: const TextStyle(
+              color: Colors.blueAccent
           ),),
           myDivider(),
           Row(
@@ -148,9 +164,9 @@ class Exercice extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
               const Icon(Icons.favorite),
-              Text("$likes Likes"),
+              Text(post.setLikes()),
               const Icon(Icons.message),
-              Text("$comments Commentaires")
+              Text(post.setComments())
             ],
           )
         ],
@@ -159,7 +175,7 @@ class Exercice extends StatelessWidget {
   }
 
   Text timeText(String time) {
-    return Text("Il y a $time", style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),);
+    return Text(time, style: const TextStyle(color: Colors.blue, fontWeight: FontWeight.bold),);
   }
 
   Row allFriends(double width) {
@@ -187,9 +203,9 @@ class Exercice extends StatelessWidget {
           width: width,
           height: width,
           decoration: BoxDecoration(
-            image: DecorationImage(image: NetworkImage(imagePath), fit: BoxFit.cover),
-            borderRadius: BorderRadius.circular(20),
-            boxShadow: const [BoxShadow(color: Colors.grey)]
+              image: DecorationImage(image: NetworkImage(imagePath), fit: BoxFit.cover),
+              borderRadius: BorderRadius.circular(20),
+              boxShadow: const [BoxShadow(color: Colors.grey)]
           ),
         ),
         Padding(
@@ -211,7 +227,7 @@ class Exercice extends StatelessWidget {
       ],
     );
   }
-  
+
   Divider myDivider() {
     return const Divider(
       height: 10,
@@ -219,15 +235,15 @@ class Exercice extends StatelessWidget {
       thickness: 2,
     );
   }
-  
+
   Widget sectionTitleText(String text) {
     return Padding(
       padding: const EdgeInsets.all(5),
       child: Text(
         text,
         style: const TextStyle(
-          fontWeight: FontWeight.w600,
-          fontSize: 18
+            fontWeight: FontWeight.w600,
+            fontSize: 18
         ),
       ),
     );
@@ -235,18 +251,18 @@ class Exercice extends StatelessWidget {
 
   Container buttonContainer({IconData? icon, String? text}) {
     return Container(
-      margin: const EdgeInsets.only(left: 10, right: 10),
-      padding: const EdgeInsets.all(15),
-      height: 50,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(20),
-        color: Colors.blue
-      ),
-      child: (icon == null)
-          ? Center(
-              child: Text(text ?? "", textAlign: TextAlign.center, style: const TextStyle(color: Colors.white)),
-            )
-          : Icon(icon, color: Colors.white)
+        margin: const EdgeInsets.only(left: 10, right: 10),
+        padding: const EdgeInsets.all(15),
+        height: 50,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(20),
+            color: Colors.blue
+        ),
+        child: (icon == null)
+            ? Center(
+          child: Text(text ?? "", textAlign: TextAlign.center, style: const TextStyle(color: Colors.white)),
+        )
+            : Icon(icon, color: Colors.white)
     );
   }
 
