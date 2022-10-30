@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_exercice_1/section_title.dart';
 import 'post.dart';
+import 'main_title_text.dart';
 
 void main() {
   runApp(const MyApp());
@@ -24,13 +26,15 @@ class MyApp extends StatelessWidget {
 
 class Exercice extends StatelessWidget {
 
-  List<Post> posts = [
+  final List<Post> posts = [
     Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
     Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
     Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
     Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
     Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
   ];
+
+  Exercice({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,16 +73,7 @@ class Exercice extends StatelessWidget {
               Row(
                 children: const [
                   Spacer(),
-                  Text(
-                    "Prof. Firizgoude",
-                    textAlign: TextAlign.center,
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 30,
-                        fontStyle: FontStyle.italic
-                    ),
-                  ),
+                  MainTitleText(data: "Prof. Firizgoude"),
                   Spacer()
                 ],
               ),
@@ -103,15 +98,15 @@ class Exercice extends StatelessWidget {
                 ],
               ),
               myDivider(),
-              sectionTitleText("A propos de moi"),
+              const SectionTitle("A propos de moi"),
               aboutRow(icon: Icons.house, text: 'Dalaran'),
               aboutRow(icon: Icons.work, text: 'Affliction Warlock'),
               aboutRow(icon: Icons.favorite, text: 'En couple avec ma succube'),
               myDivider(),
-              sectionTitleText("Amis"),
+              const SectionTitle("Mes ami(e)s"),
               allFriends(width / 3.5),
               myDivider(),
-              sectionTitleText("Mes Posts"),
+              const SectionTitle("Mes Posts"),
               allPosts(),
             ],
           ),
@@ -233,19 +228,6 @@ class Exercice extends StatelessWidget {
       height: 10,
       color: Colors.grey,
       thickness: 2,
-    );
-  }
-
-  Widget sectionTitleText(String text) {
-    return Padding(
-      padding: const EdgeInsets.all(5),
-      child: Text(
-        text,
-        style: const TextStyle(
-            fontWeight: FontWeight.w600,
-            fontSize: 18
-        ),
-      ),
     );
   }
 
