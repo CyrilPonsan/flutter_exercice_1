@@ -1,7 +1,7 @@
 class Post {
   String name;
   String time;
-  String imagePath;
+  String _imagePath = "";
   String desc;
   int likes;
   int comments;
@@ -9,11 +9,23 @@ class Post {
   Post({
     required this.name,
     required this.time,
-    required this.imagePath,
+    String imagePath = "",
     required this.desc,
     this.likes = 0,
     this.comments = 0
-  });
+  }) {
+    _imagePath = imagePath;
+  }
+
+  String get imagePath {
+    return _imagePath;
+  }
+
+  set image(String newUrl) {
+    if (newUrl != "") {
+      _imagePath = newUrl;
+    }
+  }
 
   String setTime() => "Il y a $time";
 

@@ -27,8 +27,8 @@ class MyApp extends StatelessWidget {
 class Exercice extends StatelessWidget {
 
   final List<Post> posts = [
-    Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
-    Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
+    Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma", likes: 58),
+    Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma", comments: 123),
     Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
     Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
     Post(name: "Prof. Firizgoude", time: "5 minutes", imagePath: "images/post.jpg", desc: "Visite chez Grand Ma"),
